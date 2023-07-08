@@ -1,1 +1,9 @@
 /* Write your CSS here */
+button {
+  margin: 10px;
+  width: 240px;
+}
+img {
+  width: 200px;
+  margin: 10px;
+}

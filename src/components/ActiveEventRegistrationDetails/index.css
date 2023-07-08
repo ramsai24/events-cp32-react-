@@ -1,1 +1,5 @@
 /* Write your CSS here */
+.active-container {
+  width: 50%;
+  border: 1px solid pink;
+}

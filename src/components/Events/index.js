@@ -1,3 +1,8 @@
+import {Component} from 'react'
+import EventItem from '../EventItem'
+import ActiveEventRegistrationDetails from '../ActiveEventRegistrationDetails'
+import './index.css'
+
 const eventsList = [
   {
     id: 'f9bb2373-b80e-46b8-8219-f07217b9f3ce',
@@ -48,3 +53,42 @@ const eventsList = [
   },
 ]
 // Write your code here
+const statusConstants = {
+  initial: 'INITIAL',
+  yetToRegister: 'YET_TO_REGISTER',
+  registered: 'REGISTERED',
+  registrationClosed: 'REGISTRATION_CLOSED',
+}
+
+class Events extends Component {
+  state = {activeStatus: statusConstants.initial}
+
+  eventStatusUpdate = eventStatus => this.setState({activeStatus: eventStatus})
+
+  getRenderingElement = () => {
+    const {activeStatus} = this.state
+    return <ActiveEventRegistrationDetails status={activeStatus} />
+  }
+
+  render() {
+    return (
+      <div className="app-container">
+        <div className="events-image-container">
+          <h1>Events</h1>
+          <ul className="events-container">
+            {eventsList.map(eventItem => (
+              <EventItem
+                eventItem={eventItem}
+                key={eventItem.id}
+                eventStatus={this.eventStatusUpdate}
+              />
+            ))}
+          </ul>
+        </div>
+        {this.getRenderingElement()}
+      </div>
+    )
+  }
+}
+
+export default Events
